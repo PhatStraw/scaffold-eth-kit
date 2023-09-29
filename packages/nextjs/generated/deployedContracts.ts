@@ -4,17 +4,11 @@ const contracts = {
       chainId: "31337",
       name: "localhost",
       contracts: {
-        YourContract: {
-          address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+        CashApp: {
+          address: "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9",
           abi: [
             {
-              inputs: [
-                {
-                  internalType: "address",
-                  name: "_owner",
-                  type: "address",
-                },
-              ],
+              inputs: [],
               stateMutability: "nonpayable",
               type: "constructor",
             },
@@ -22,67 +16,41 @@ const contracts = {
               anonymous: false,
               inputs: [
                 {
-                  indexed: true,
-                  internalType: "address",
-                  name: "greetingSetter",
-                  type: "address",
-                },
-                {
                   indexed: false,
                   internalType: "string",
-                  name: "newGreeting",
+                  name: "content",
                   type: "string",
                 },
                 {
                   indexed: false,
-                  internalType: "bool",
-                  name: "premium",
-                  type: "bool",
+                  internalType: "string",
+                  name: "sender",
+                  type: "string",
                 },
                 {
                   indexed: false,
-                  internalType: "uint256",
-                  name: "value",
-                  type: "uint256",
+                  internalType: "string",
+                  name: "receiver",
+                  type: "string",
                 },
               ],
-              name: "GreetingChange",
+              name: "MessageSent",
               type: "event",
             },
             {
-              inputs: [],
-              name: "greeting",
-              outputs: [
+              inputs: [
                 {
                   internalType: "string",
                   name: "",
                   type: "string",
                 },
               ],
-              stateMutability: "view",
-              type: "function",
-            },
-            {
-              inputs: [],
-              name: "owner",
+              name: "balances",
               outputs: [
                 {
-                  internalType: "address",
+                  internalType: "uint256",
                   name: "",
-                  type: "address",
-                },
-              ],
-              stateMutability: "view",
-              type: "function",
-            },
-            {
-              inputs: [],
-              name: "premium",
-              outputs: [
-                {
-                  internalType: "bool",
-                  name: "",
-                  type: "bool",
+                  type: "uint256",
                 },
               ],
               stateMutability: "view",
@@ -92,50 +60,95 @@ const contracts = {
               inputs: [
                 {
                   internalType: "string",
-                  name: "_newGreeting",
+                  name: "",
                   type: "string",
                 },
               ],
-              name: "setGreeting",
+              name: "cashtag",
+              outputs: [
+                {
+                  internalType: "address",
+                  name: "",
+                  type: "address",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "uint256",
+                  name: "",
+                  type: "uint256",
+                },
+              ],
+              name: "messages",
+              outputs: [
+                {
+                  internalType: "string",
+                  name: "content",
+                  type: "string",
+                },
+                {
+                  internalType: "string",
+                  name: "sender",
+                  type: "string",
+                },
+                {
+                  internalType: "string",
+                  name: "receiver",
+                  type: "string",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "string",
+                  name: "_cashtag",
+                  type: "string",
+                },
+                {
+                  internalType: "string",
+                  name: "_from",
+                  type: "string",
+                },
+                {
+                  internalType: "string",
+                  name: "_message",
+                  type: "string",
+                },
+              ],
+              name: "pay",
               outputs: [],
               stateMutability: "payable",
               type: "function",
             },
             {
-              inputs: [],
-              name: "totalCounter",
-              outputs: [
+              inputs: [
                 {
-                  internalType: "uint256",
-                  name: "",
-                  type: "uint256",
+                  internalType: "string",
+                  name: "_cashtag",
+                  type: "string",
                 },
               ],
-              stateMutability: "view",
+              name: "register",
+              outputs: [],
+              stateMutability: "nonpayable",
               type: "function",
             },
             {
               inputs: [
                 {
-                  internalType: "address",
-                  name: "",
-                  type: "address",
+                  internalType: "string",
+                  name: "_cashtag",
+                  type: "string",
                 },
               ],
-              name: "userGreetingCounter",
-              outputs: [
-                {
-                  internalType: "uint256",
-                  name: "",
-                  type: "uint256",
-                },
-              ],
-              stateMutability: "view",
-              type: "function",
-            },
-            {
-              inputs: [],
-              name: "withdraw",
+              name: "withdrawl",
               outputs: [],
               stateMutability: "nonpayable",
               type: "function",
