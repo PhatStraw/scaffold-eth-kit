@@ -4,75 +4,136 @@ const contracts = {
       chainId: "31337",
       name: "localhost",
       contracts: {
-        CashApp: {
-          address: "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9",
+        Casino: {
+          address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
           abi: [
             {
-              inputs: [],
-              stateMutability: "nonpayable",
-              type: "constructor",
+              anonymous: false,
+              inputs: [
+                {
+                  indexed: true,
+                  internalType: "uint256",
+                  name: "_commitment",
+                  type: "uint256",
+                },
+                {
+                  indexed: true,
+                  internalType: "address",
+                  name: "_sideA",
+                  type: "address",
+                },
+              ],
+              name: "BetAccepted",
+              type: "event",
             },
             {
               anonymous: false,
               inputs: [
                 {
-                  indexed: false,
-                  internalType: "string",
-                  name: "content",
-                  type: "string",
+                  indexed: true,
+                  internalType: "uint256",
+                  name: "_commitment",
+                  type: "uint256",
                 },
                 {
                   indexed: false,
-                  internalType: "string",
-                  name: "sender",
-                  type: "string",
-                },
-                {
-                  indexed: false,
-                  internalType: "string",
-                  name: "receiver",
-                  type: "string",
+                  internalType: "uint256",
+                  name: "value",
+                  type: "uint256",
                 },
               ],
-              name: "MessageSent",
+              name: "BetProposed",
+              type: "event",
+            },
+            {
+              anonymous: false,
+              inputs: [
+                {
+                  indexed: true,
+                  internalType: "uint256",
+                  name: "_commitment",
+                  type: "uint256",
+                },
+                {
+                  indexed: false,
+                  internalType: "address",
+                  name: "winner",
+                  type: "address",
+                },
+                {
+                  indexed: false,
+                  internalType: "address",
+                  name: "loser",
+                  type: "address",
+                },
+                {
+                  indexed: false,
+                  internalType: "uint256",
+                  name: "value",
+                  type: "uint256",
+                },
+              ],
+              name: "BetSettled",
               type: "event",
             },
             {
               inputs: [
                 {
-                  internalType: "string",
-                  name: "",
-                  type: "string",
+                  internalType: "uint256",
+                  name: "_commitment",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "_random",
+                  type: "uint256",
                 },
               ],
-              name: "balances",
-              outputs: [
+              name: "acceptBet",
+              outputs: [],
+              stateMutability: "payable",
+              type: "function",
+            },
+            {
+              inputs: [
                 {
                   internalType: "uint256",
                   name: "",
                   type: "uint256",
                 },
               ],
-              stateMutability: "view",
-              type: "function",
-            },
-            {
-              inputs: [
-                {
-                  internalType: "string",
-                  name: "",
-                  type: "string",
-                },
-              ],
-              name: "cashtag",
+              name: "acceptedBet",
               outputs: [
                 {
                   internalType: "address",
-                  name: "",
+                  name: "sideB",
                   type: "address",
+                },
+                {
+                  internalType: "uint256",
+                  name: "acceptedAt",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "randomB",
+                  type: "uint256",
                 },
               ],
               stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "uint256",
+                  name: "_commitment",
+                  type: "uint256",
+                },
+              ],
+              name: "proposeBet",
+              outputs: [],
+              stateMutability: "payable",
               type: "function",
             },
             {
@@ -83,22 +144,27 @@ const contracts = {
                   type: "uint256",
                 },
               ],
-              name: "messages",
+              name: "proposedBet",
               outputs: [
                 {
-                  internalType: "string",
-                  name: "content",
-                  type: "string",
+                  internalType: "address",
+                  name: "sideA",
+                  type: "address",
                 },
                 {
-                  internalType: "string",
-                  name: "sender",
-                  type: "string",
+                  internalType: "uint256",
+                  name: "value",
+                  type: "uint256",
                 },
                 {
-                  internalType: "string",
-                  name: "receiver",
-                  type: "string",
+                  internalType: "uint256",
+                  name: "placedAt",
+                  type: "uint256",
+                },
+                {
+                  internalType: "bool",
+                  name: "accepted",
+                  type: "bool",
                 },
               ],
               stateMutability: "view",
@@ -107,55 +173,15 @@ const contracts = {
             {
               inputs: [
                 {
-                  internalType: "string",
-                  name: "_cashtag",
-                  type: "string",
-                },
-                {
-                  internalType: "string",
-                  name: "_from",
-                  type: "string",
-                },
-                {
-                  internalType: "string",
-                  name: "_message",
-                  type: "string",
+                  internalType: "uint256",
+                  name: "_random",
+                  type: "uint256",
                 },
               ],
-              name: "pay",
-              outputs: [],
-              stateMutability: "payable",
-              type: "function",
-            },
-            {
-              inputs: [
-                {
-                  internalType: "string",
-                  name: "_cashtag",
-                  type: "string",
-                },
-              ],
-              name: "register",
+              name: "reveal",
               outputs: [],
               stateMutability: "nonpayable",
               type: "function",
-            },
-            {
-              inputs: [
-                {
-                  internalType: "string",
-                  name: "_cashtag",
-                  type: "string",
-                },
-              ],
-              name: "withdrawl",
-              outputs: [],
-              stateMutability: "nonpayable",
-              type: "function",
-            },
-            {
-              stateMutability: "payable",
-              type: "receive",
             },
           ],
         },
