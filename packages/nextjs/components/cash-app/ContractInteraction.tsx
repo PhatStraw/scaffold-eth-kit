@@ -2,6 +2,8 @@ import { useState } from "react";
 import { CopyIcon } from "../example-ui/assets/CopyIcon";
 import { DiamondIcon } from "../example-ui/assets/DiamondIcon";
 import { HareIcon } from "../example-ui/assets/HareIcon";
+import { Register } from "./register";
+import { Withdrawl } from "./withdrawl";
 import { ArrowSmallRightIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
 
@@ -101,6 +103,10 @@ export const ContractInteraction = () => {
               </div>
             </div>
           </div>
+          {/* Register */}
+          <Register />
+          {/* WITHDRAWL */}
+          <Withdrawl />
         </div>
       </div>
     </div>

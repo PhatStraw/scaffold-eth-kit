@@ -1,5 +1,5 @@
 import { useState } from "react";
-// import { useAccount } from "wagmi";
+import { useAccount } from "wagmi";
 import {
   useScaffoldContract,
   useScaffoldContractRead,
@@ -8,20 +8,21 @@ import {
 } from "~~/hooks/scaffold-eth";
 
 export const ContractData = () => {
-  //   const { address } = useAccount();
+  const { address } = useAccount();
   const [transitionEnabled, setTransitionEnabled] = useState(true);
 
-  //   const { data: balances } = useScaffoldContractRead({
-  //     contractName: "CashApp",
-  //     functionName: "balances",
-  //     args: [address],
-  //   });
+  const { data: balances } = useScaffoldContractRead({
+    contractName: "CashApp",
+    functionName: "balances",
+    args: [address],
+  });
 
-  //   const { data: cashTagOwner } = useScaffoldContractRead({
-  //     contractName: "CashApp",
-  //     functionName: "cashtag",
-  //     args: [address],
-  //   });
+  const { data: cashTagOwner } = useScaffoldContractRead({
+    contractName: "CashApp",
+    functionName: "cashtag",
+    args: [address],
+  });
+  console.log("addy", cashTagOwner);
 
   const { data: messages } = useScaffoldContractRead({
     contractName: "CashApp",
@@ -81,14 +82,25 @@ export const ContractData = () => {
           </div>
         </div>
 
-        <div className="overflow-scroll  mt-3 border border-primary bg-neutral rounded-3xl text-secondary text-[116px]  w-full uppercase tracking-tighter font-bai-jamjuree">
-          <div className="overflow-scrol ">
+        <div className="overflow-scroll mt-3 border border-primary bg-neutral rounded-3xl text-secondary text-[116px] w-full uppercase tracking-tighter font-bai-jamjuree">
+          <div className="overflow-scrol">
             {messageSentChangeEvents?.map(i => (
               <div key={i} className="px-4">
                 {i.args.content},{i.args.sender},{i.args.receiver}
               </div>
             )) || null}
           </div>
+        </div>
+
+        {/* New section */}
+        <div className="mt-3">
+          <div className="text-secondary text-lg font-bold mb-2">Cash Tag Owner:</div>
+          <div className="text-secondary text-xl font-bold">{cashTagOwner}</div>
+        </div>
+
+        <div className="mt-3">
+          <div className="text-secondary text-lg font-bold mb-2">Balances:</div>
+          <div className="text-secondary text-xl font-bold">{balances?.toString()}</div>
         </div>
       </div>
     </div>
