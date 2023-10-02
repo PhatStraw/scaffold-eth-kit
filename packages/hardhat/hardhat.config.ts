@@ -54,6 +54,17 @@ const config: HardhatUserConfig = {
       url: `https://eth-goerli.alchemyapi.io/v2/${providerApiKey}`,
       accounts: [deployerPrivateKey],
     },
+    "base-mainnet": {
+      url: "https://mainnet.base.org",
+      accounts: [deployerPrivateKey],
+      gasPrice: 1000000000,
+    },
+    // for testnet
+    "base-goerli": {
+      url: "https://goerli.base.org",
+      accounts: [deployerPrivateKey],
+      gasPrice: 1000000000,
+    },
     arbitrum: {
       url: `https://arb-mainnet.g.alchemy.com/v2/${providerApiKey}`,
       accounts: [deployerPrivateKey],
@@ -115,10 +126,21 @@ const config: HardhatUserConfig = {
       accounts: [deployerPrivateKey],
     },
   },
-  verify: {
-    etherscan: {
-      apiKey: `${etherscanApiKey}`,
+  etherscan: {
+    apiKey: {
+      mainnet: `${etherscanApiKey}`,
+      "base-goerli": `${process.env.BASE_API}`,
     },
+    customChains: [
+      {
+        network: "base-goerli",
+        chainId: 84531,
+        urls: {
+          apiURL: "https://api-goerli.basescan.org/api",
+          browserURL: "https://goerli.basescan.org",
+        },
+      },
+    ],
   },
 };
 
